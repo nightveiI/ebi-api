@@ -13,7 +13,7 @@ exports.findAll = (req, res) => {
 
 
 exports.findOne = (req, res) => {
-  user.findbyUser(req.params.username, (err, data) => {
+  user.findbyUser(req.params.username, req.params.password, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({

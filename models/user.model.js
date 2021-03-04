@@ -7,8 +7,8 @@ const User = function (user) {
 };
 
 
-User.findbyUser = (username, result) => {
-    sql.query(`SELECT * FROM tblusuarios_reg where UName= '${username}'`, (err, res) => {
+User.findbyUser = (username, password, result) => {
+    sql.query(`SELECT * FROM tblusuarios_reg where UName= '${username}' AND password= '${password}'`, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
