@@ -26,19 +26,6 @@ User.findbyUser = (username, password, result) => {
     });
 }
 
-User.getAll = result => {
-    sql.query("SELECT * FROM tblusuarios_reg", (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            result(null, err);
-            return;
-        }
-
-        console.log("users : ", res);
-        result(null, res);
-    });
-};
-
 
 User.getTables = (userID, result) => {
     sql.query(`SELECT T_TRA.EcoSellos, T_TRA.ViajeOrigen, T_TRA.ViajeOrigen, T_TRA.ViajeDestino, T_TRA.ViajeInicio, T_TRA.ViajeLlegada, T_TRA.ViajeETA, T_TRA.ViajeReferencia, T_TRA.IdLineaTransporte, T_LT.NombreLineaTransporte, T_TRA.IdObservacion, T_OBS.NombreObservacion, T_TRA.ViajeNotas, T_TRA.POCliente, T_TRA.fechaDescargado, T_TRA.horaDescargado, T_TRA.fechaEntregaCliente, T_TRA.horaEntregaCliente   FROM tbltramites T_TRA LEFT JOIN tbllineastransporte T_LT ON T_TRA.IdLineaTransporte = T_LT.IdLineaTransporte LEFT JOIN tbltramites_status_observa T_OBS ON T_TRA.IdObservacion = T_OBS.IdObservacion WHERE T_TRA.IdInspeccion =1 AND  T_TRA.IdTipoManiobra = 1 AND T_TRA.IdClienteFactura = '${userID}'`, (err, res) => {
