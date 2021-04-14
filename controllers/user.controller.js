@@ -1,5 +1,8 @@
 const user = require("../models/user.model.js");
 
+
+
+
 exports.findOne = (req, res) => {
   user.findbyUser(req.params.username, req.params.password, (err, data) => {
     if (err) {
@@ -58,22 +61,6 @@ exports.retrieveInventory = (req,res) => {
       } else {
         res.status(900).send({
           message: "Error retrieving inventory with user ID " + req.params.userID
-        });
-      }
-    } else res.send(data);
-  });
-};
-
-exports.getTraffic = (req,res) => {
-  user.retrieveTraffic((err, data) => {
-    if(err){
-      if(err.kind == "not_found") {
-        res.status(404).send ({
-          message: `No Traffic Found.`
-        });
-      } else {
-        res.status(900).send({
-          message: "Error retrieving traffic."
         });
       }
     } else res.send(data);

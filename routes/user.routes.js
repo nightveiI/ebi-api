@@ -4,5 +4,5 @@ module.exports = app => {
     app.get("/users/:username/:password", users.findOne);
     app.get("/userTables/:userID", users.findOrders);
     app.get("/userTables/done/:userID", users.findDoneOrders);
-    app.get("/truckTraffic", users.getTraffic);
+    app.get("/inventory/:userID", users.retrieveInventory);
 };

@@ -27,6 +27,8 @@ User.findbyUser = (username, password, result) => {
 }
 
 
+
+
 User.getTables = (userID, result) => {
     sql.query(`SELECT T_TRA.EcoSellos, T_TRA.ViajeOrigen, T_TRA.ViajeOrigen, T_TRA.ViajeDestino, T_TRA.ViajeInicio, T_TRA.ViajeLlegada, T_TRA.ViajeETA, T_TRA.ViajeReferencia, T_TRA.IdLineaTransporte, T_LT.NombreLineaTransporte, T_TRA.IdObservacion, T_OBS.NombreObservacion, T_TRA.ViajeNotas, T_TRA.POCliente, T_TRA.fechaDescargado, T_TRA.horaDescargado, T_TRA.fechaEntregaCliente, T_TRA.horaEntregaCliente   FROM tbltramites T_TRA LEFT JOIN tbllineastransporte T_LT ON T_TRA.IdLineaTransporte = T_LT.IdLineaTransporte LEFT JOIN tbltramites_status_observa T_OBS ON T_TRA.IdObservacion = T_OBS.IdObservacion WHERE T_TRA.IdInspeccion =1 AND  T_TRA.IdTipoManiobra = 1 AND T_TRA.IdClienteFactura = '${userID}'`, (err, res) => {
         if (err) {
@@ -69,23 +71,6 @@ User.getInventory = (userID, result) => {
         }
 
         console.log("user Table : ", res);
-        result(null, res);
-    });
-}
-
-User.retrieveTraffic = () => {
-    sql.query(`SELECT tbltramites.IdFolioTramite FOLIO, tbltramites.EcoSellos ECO, tbllineastransporte.NombreLineaTRansporte TRANSPORTE, tbltramites.HoraListo HORA FROM tbltramites 
-    INNER JOIN tbllineastransporte ON tbltramites.IdLineaTransporte = tbllineastransporte.IdLineaTransporte 
-    INNER JOIN tbltramitestiempos ON tbltramites.IdInspeccion = tbltramitestiempos.IdINspeccion AND tbltramitestiempos.IdConceptoTiempo =10 
-    AND tbltramites.IdFolioTRamite = tbltramitestiempos.IdFolioTramite WHERE tbltramites.IdInspeccion = 1 AND tbltramites.Listo = 1 AND tbltramitestiempos.HoraRegistro IS NULL
-    `, (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            result(null, err);
-            return;
-        }
-
-        console.log("current traffic : ", res);
         result(null, res);
     });
 }
