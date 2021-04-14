@@ -63,3 +63,19 @@ exports.retrieveInventory = (req,res) => {
     } else res.send(data);
   });
 };
+
+exports.getTraffic = (req,res) => {
+  user.re(req.params.userID, (err, data) => {
+    if(err){
+      if(err.kind == "not_found") {
+        res.status(404).send ({
+          message: `No Traffic Found.`
+        });
+      } else {
+        res.status(900).send({
+          message: "Error retrieving traffic."
+        });
+      }
+    } else res.send(data);
+  });
+};
