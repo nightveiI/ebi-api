@@ -73,7 +73,7 @@ User.getInventory = (userID, result) => {
     });
 }
 
-getTraffic = () => {
+User.retrieveTraffic = () => {
     sql.query(`SELECT tbltramites.IdFolioTramite FOLIO, tbltramites.EcoSellos ECO, tbllineastransporte.NombreLineaTRansporte TRANSPORTE, tbltramites.HoraListo HORA FROM tbltramites 
     INNER JOIN tbllineastransporte ON tbltramites.IdLineaTransporte = tbllineastransporte.IdLineaTransporte 
     INNER JOIN tbltramitestiempos ON tbltramites.IdInspeccion = tbltramitestiempos.IdINspeccion AND tbltramitestiempos.IdConceptoTiempo =10 

@@ -65,7 +65,7 @@ exports.retrieveInventory = (req,res) => {
 };
 
 exports.getTraffic = (req,res) => {
-  user.re(req.params.userID, (err, data) => {
+  user.retrieveTraffic((err, data) => {
     if(err){
       if(err.kind == "not_found") {
         res.status(404).send ({
