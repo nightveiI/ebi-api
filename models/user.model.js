@@ -75,6 +75,24 @@ User.getInventory = (userID, result) => {
     });
 }
 
+User.getTraffic = (result) => {
+    sql.query(`SELECT tbltramites.IdFolioTramite FOLIO, tbltramites.EcoSellos ECO, tbllineastransporte.NombreLineaTRansporte TRANSPORTE, tbltramites.HoraListo HORA FROM tbltramites 
+    INNER JOIN tbllineastransporte ON tbltramites.IdLineaTransporte = tbllineastransporte.IdLineaTransporte 
+    INNER JOIN tbltramitestiempos ON tbltramites.IdInspeccion = tbltramitestiempos.IdINspeccion AND tbltramitestiempos.IdConceptoTiempo =10 
+    AND tbltramites.IdFolioTRamite = tbltramitestiempos.IdFolioTramite WHERE tbltramites.IdInspeccion = 1 And tbltramites.Listo = 1 And tbltramitestiempos.HoraRegistro Is Null
+    `, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
+
+        console.log("Traffics Table : ", res);
+        result(null, res);
+    });
+}
+
+
 
 
 
