@@ -6,5 +6,4 @@ module.exports = app => {
     app.get("/userTables/done/:userID", users.findDoneOrders);
     app.get("/inventory/:userID", users.retrieveInventory);
     app.get("/trucktraffic", users.retrieveTraffic);
-
 };
