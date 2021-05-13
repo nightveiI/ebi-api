@@ -7,6 +7,6 @@ module.exports = app => {
     app.get("/inventory/:userID", users.retrieveInventory);
     app.get("/trucktraffic", users.retrieveTraffic);
     app.get("/operationtables/:userID", users.retrieveOperations);
-    app.get("/operationtables2/:userID", users.retrieveOperations);
+    app.get("/operationtables2/:userID", users.retrieveOperations2);
 
 };

@@ -19,11 +19,11 @@ exports.findOne = (req, res) => {
   });
 };
 
-exports.findOrders = (req,res) => {
+exports.findOrders = (req, res) => {
   user.getTables(req.params.userID, (err, data) => {
-    if(err){
-      if(err.kind == "not_found") {
-        res.status(404).send ({
+    if (err) {
+      if (err.kind == "not_found") {
+        res.status(404).send({
           message: `Not found tables with userID ${req.params.userID}.`
         });
       } else {
@@ -35,11 +35,11 @@ exports.findOrders = (req,res) => {
   });
 };
 
-exports.findDoneOrders = (req,res) => {
+exports.findDoneOrders = (req, res) => {
   user.getdoneTables(req.params.userID, (err, data) => {
-    if(err){
-      if(err.kind == "not_found") {
-        res.status(404).send ({
+    if (err) {
+      if (err.kind == "not_found") {
+        res.status(404).send({
           message: `Not found tables with userID ${req.params.userID}.`
         });
       } else {
@@ -51,11 +51,11 @@ exports.findDoneOrders = (req,res) => {
   });
 };
 
-exports.retrieveInventory = (req,res) => {
+exports.retrieveInventory = (req, res) => {
   user.getInventory(req.params.userID, (err, data) => {
-    if(err){
-      if(err.kind == "not_found") {
-        res.status(404).send ({
+    if (err) {
+      if (err.kind == "not_found") {
+        res.status(404).send({
           message: `Not found inventory with userID ${req.params.userID}.`
         });
       } else {
@@ -67,16 +67,16 @@ exports.retrieveInventory = (req,res) => {
   });
 };
 
-exports.retrieveTraffic = (req,res) => {
-  user.getTraffic( (err, data) => {
-    if(err){
-      if(err.kind == "not_found") {
-        res.status(404).send ({
+exports.retrieveTraffic = (req, res) => {
+  user.getTraffic((err, data) => {
+    if (err) {
+      if (err.kind == "not_found") {
+        res.status(404).send({
           message: `Not found traffic.`
         });
       } else {
         res.status(900).send({
-          message: "Error retrieving traffic" 
+          message: "Error retrieving traffic"
         });
       }
     } else res.send(data);
@@ -84,32 +84,32 @@ exports.retrieveTraffic = (req,res) => {
 };
 
 
-exports.retrieveTraffic = (req,res) => {
-  user.getTraffic( (err, data) => {
-    if(err){
-      if(err.kind == "not_found") {
-        res.status(404).send ({
+exports.retrieveTraffic = (req, res) => {
+  user.getTraffic((err, data) => {
+    if (err) {
+      if (err.kind == "not_found") {
+        res.status(404).send({
           message: `Not found traffic.`
         });
       } else {
         res.status(900).send({
-          message: "Error retrieving traffic" 
+          message: "Error retrieving traffic"
         });
       }
     } else res.send(data);
   });
 };
 
-exports.retrieveOperations = (req,res) => {
-  user.getOperations( (err, data) => {
-    if(err){
-      if(err.kind == "not_found") {
-        res.status(404).send ({
+exports.retrieveOperations = (req, res) => {
+  user.getOperations(req.params.userID, (err, data) => {
+    if (err) {
+      if (err.kind == "not_found") {
+        res.status(404).send({
           message: `Not found.`
         });
       } else {
         res.status(900).send({
-          message: "Error retrieving operations" 
+          message: "Error retrieving operations"
         });
       }
     } else res.send(data);
@@ -117,16 +117,16 @@ exports.retrieveOperations = (req,res) => {
 };
 
 
-exports.retrieveOperations2 = (req,res) => {
-  user.get2ndOperations( (err, data) => {
-    if(err){
-      if(err.kind == "not_found") {
-        res.status(404).send ({
+exports.retrieveOperations2 = (req, res) => {
+  user.get2ndOperations(req.params.userID, (err, data) => {
+    if (err) {
+      if (err.kind == "not_found") {
+        res.status(404).send({
           message: `Not found.`
         });
       } else {
         res.status(900).send({
-          message: "Error retrieving operations" 
+          message: "Error retrieving operations"
         });
       }
     } else res.send(data);
