@@ -101,7 +101,7 @@ exports.retrieveTraffic = (req, res) => {
 };
 
 exports.retrieveOperations = (req, res) => {
-  user.getOperations(req.params.userID, (err, data) => {
+  user.getProcessingOperations(req.params.userID, (err, data) => {
     if (err) {
       if (err.kind == "not_found") {
         res.status(404).send({
@@ -117,8 +117,8 @@ exports.retrieveOperations = (req, res) => {
 };
 
 
-exports.retrieveOperations2 = (req, res) => {
-  user.get2ndOperations(req.params.userID, (err, data) => {
+exports.retrieveDoneOperations = (req, res) => {
+  user.getDoneOperations(req.params.userID, (err, data) => {
     if (err) {
       if (err.kind == "not_found") {
         res.status(404).send({

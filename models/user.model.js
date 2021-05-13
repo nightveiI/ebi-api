@@ -92,14 +92,14 @@ User.getTraffic = (result) => {
     });
 }
 
-User.getOperations = (userID, result) => {
+User.getProcessingOperations = (userID, result) => {
     sql.query(`SELECT TR.IdFOlioTramite, TR.IdConceptoProceso, TR.FechaTramite, TR.IdAduana, AD.NombreAduana, TR.IdClienteFactura, CL.NombreCLiente, TR.IdLineaTRansporte, 
     LT.NombreLineaTRansporte, TR.IdTramite, TR.FechaLLegada, TR.POCliente, TR.EcoSellos, TR.FechaConceptoProceso, TR.Listo, TR.HoraListo, VO.Secuencia, VO.FechaENtrada, 
     VO.HoraENtrada, VO.IdLocalizacion, VO.TelRadio 
     FROM tbltramites TR  LEFT JOIN tbladuanas AD ON TR.IdAduana = AD.IdAduana  
     LEFT JOIN tblclientes CL ON TR.IdCLienteFactura = CL.IdCliente LEFT JOIN tbllineastransporte LT ON TR.IdLIneaTRansporte = LT.IdLineaTRansporte 
     LEFT JOIN tblvehiculos_operaciones VO ON TR.EcoSellos = VO.NumEconomico AND TR.IdLineaTRansporte = VO.IdLineaTransporte AND TR.FechaTramite = VO.FechaEntrada  
-    WHERE TR.FolioCancelado =0 AND TR.IdInspeccion =1 AND TR.IdClienteFactura ='${userID}'`, (err, res) => {
+    WHERE TR.FolioCancelado =0 AND TR.IdInspeccion =1 AND TR.IdConceptoProceso =1 AND TR.IdClienteFactura ='${userID}'`, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
@@ -111,7 +111,7 @@ User.getOperations = (userID, result) => {
     });
 }
 
-User.get2ndOperations = (userID, result) => {
+User.getDoneOperations = (userID, result) => {
     const today = new Date();
     const yesterday = new Date(today);
 
