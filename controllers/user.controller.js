@@ -82,3 +82,53 @@ exports.retrieveTraffic = (req,res) => {
     } else res.send(data);
   });
 };
+
+
+exports.retrieveTraffic = (req,res) => {
+  user.getTraffic( (err, data) => {
+    if(err){
+      if(err.kind == "not_found") {
+        res.status(404).send ({
+          message: `Not found traffic.`
+        });
+      } else {
+        res.status(900).send({
+          message: "Error retrieving traffic" 
+        });
+      }
+    } else res.send(data);
+  });
+};
+
+exports.retrieveOperations = (req,res) => {
+  user.getOperations( (err, data) => {
+    if(err){
+      if(err.kind == "not_found") {
+        res.status(404).send ({
+          message: `Not found.`
+        });
+      } else {
+        res.status(900).send({
+          message: "Error retrieving operations" 
+        });
+      }
+    } else res.send(data);
+  });
+};
+
+
+exports.retrieveOperations2 = (req,res) => {
+  user.get2ndOperations( (err, data) => {
+    if(err){
+      if(err.kind == "not_found") {
+        res.status(404).send ({
+          message: `Not found.`
+        });
+      } else {
+        res.status(900).send({
+          message: "Error retrieving operations" 
+        });
+      }
+    } else res.send(data);
+  });
+};
