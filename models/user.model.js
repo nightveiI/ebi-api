@@ -112,12 +112,12 @@ User.getProcessingOperations = (userID, result) => {
 }
 
 User.getDoneOperations = (userID, result) => {
-    const today = new Date();
-    const yesterday = new Date(today);
+    var today = new Date();
+    var yesterday = new Date(today);
 
     yesterday.setDate(yesterday.getDate() - 1);
     var dd = String(yesterday.getDate()).padStart(2, '0');
-    var mm = String(yesterday.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var mm = String(yesterday.getMonth() + 1).padStart(2, '0'); 
     var yyyy = yesterday.getFullYear();
     yesterday = yyyy + '/' + mm + '/' + dd;
     sql.query(`SELECT TR.IdFOlioTramite, TR.IdConceptoProceso, TR.FechaTramite, TR.IdAduana, AD.NombreAduana, TR.IdClienteFactura, CL.NombreCLiente, TR.IdLineaTRansporte, LT.NombreLineaTRansporte, 
@@ -125,7 +125,7 @@ User.getDoneOperations = (userID, result) => {
     FROM tbltramites TR  LEFT JOIN tbladuanas AD ON TR.IdAduana = AD.IdAduana 
     LEFT JOIN tblclientes CL ON TR.IdCLienteFactura = CL.IdCliente LEFT JOIN tbllineastransporte LT ON TR.IdLIneaTRansporte = LT.IdLineaTRansporte 
     LEFT JOIN tblvehiculos_operaciones VO ON TR.EcoSellos = VO.NumEconomico AND TR.IdLineaTRansporte = VO.IdLineaTransporte AND TR.FechaTramite = VO.FechaEntrada 
-    WHERE TR.FolioCancelado =0 AND TR.IdInspeccion =1 AND TR.IdConceptoProceso =6 AND TR.FechaTramite> '${yesterday.toDateString()}' AND TR.IdClienteFactura ='${userID}'`, (err, res) => {
+    WHERE TR.FolioCancelado =0 AND TR.IdInspeccion =1 AND TR.IdConceptoProceso =6 AND TR.FechaTramite> '${yesterday.toString()}' AND TR.IdClienteFactura ='${userID}'`, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
