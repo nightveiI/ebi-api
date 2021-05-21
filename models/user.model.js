@@ -99,7 +99,7 @@ User.getProcessingOperations = (userID, result) => {
     var yyyy = today.getFullYear();
     today = yyyy + '/' + mm + '/' + dd;
     sql.query(`SELECT TR.IdFOlioTramite, TR.IdConceptoProceso, TR.FechaTramite, TR.IdAduana, AD.NombreAduana, TR.IdClienteFactura, CL.NombreCLiente, TR.IdLineaTRansporte, 
-    LT.NombreLineaTRansporte, TR.IdTramite, TR.FechaLLegada, TR.POCliente, TR.EcoSellos, TR.FechaConceptoProceso, TR.Listo, TR.HoraListo, VO.Secuencia, VO.FechaENtrada, 
+    LT.NombreLineaTRansporte, TR.IdTramite, TR.FechaLLegada, TR.POCliente, TR.EcoSellos, TR.FechaConceptoProceso, TR.Listo, TR.HoraListo, TR.cadenatiempo, VO.Secuencia, VO.FechaENtrada, 
     VO.HoraENtrada, VO.IdLocalizacion, VO.TelRadio 
     FROM tbltramites TR  LEFT JOIN tbladuanas AD ON TR.IdAduana = AD.IdAduana  
     LEFT JOIN tblclientes CL ON TR.IdCLienteFactura = CL.IdCliente LEFT JOIN tbllineastransporte LT ON TR.IdLIneaTRansporte = LT.IdLineaTRansporte 
@@ -126,7 +126,7 @@ User.getDoneOperations = (userID, result) => {
     var yyyy = yesterday.getFullYear();
     yesterday = yyyy + '/' + mm + '/' + dd;
     sql.query(`SELECT TR.IdFOlioTramite, TR.IdConceptoProceso, TR.FechaTramite, TR.IdAduana, AD.NombreAduana, TR.IdClienteFactura, CL.NombreCLiente, TR.IdLineaTRansporte, LT.NombreLineaTRansporte, 
-    TR.IdTramite, TR.FechaLLegada, TR.POCliente, TR.EcoSellos, TR.FechaConceptoProceso, TR.Listo, TR.HoraListo, VO.Secuencia, VO.FechaENtrada, VO.HoraENtrada, VO.IdLocalizacion, VO.TelRadio 
+    TR.IdTramite, TR.FechaLLegada, TR.POCliente, TR.EcoSellos, TR.FechaConceptoProceso, TR.Listo, TR.HoraListo, TR.cadenatiempo, VO.Secuencia, VO.FechaENtrada, VO.HoraENtrada, VO.IdLocalizacion, VO.TelRadio 
     FROM tbltramites TR  LEFT JOIN tbladuanas AD ON TR.IdAduana = AD.IdAduana 
     LEFT JOIN tblclientes CL ON TR.IdCLienteFactura = CL.IdCliente LEFT JOIN tbllineastransporte LT ON TR.IdLIneaTRansporte = LT.IdLineaTRansporte 
     LEFT JOIN tblvehiculos_operaciones VO ON TR.EcoSellos = VO.NumEconomico AND TR.IdLineaTRansporte = VO.IdLineaTransporte AND TR.FechaTramite = VO.FechaEntrada 
