@@ -8,5 +8,4 @@ module.exports = app => {
     app.get("/trucktraffic", users.retrieveTraffic);
     app.get("/operations/:userID", users.retrieveOperations);
     app.get("/operations/done/:userID", users.retrieveDoneOperations);
-
 };
