@@ -110,7 +110,6 @@ User.getProcessingOperations = (userID, result) => {
             result(null, err);
             return;
         }
-
         console.log("Operations Table : ", res);
         result(null, res);
     });
