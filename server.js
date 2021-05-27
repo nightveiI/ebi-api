@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // simple route
 app.get("/", (req, res) => {
 
-  res.json({ message: "Hello World." });
+  res.json({ message: "Hello World."});
 });
 
 require("./routes/user.routes.js")(app);
