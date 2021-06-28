@@ -116,9 +116,40 @@ exports.retrieveOperations = (req, res) => {
   });
 };
 
-
 exports.retrieveDoneOperations = (req, res) => {
   user.getDoneOperations(req.params.userID, (err, data) => {
+    if (err) {
+      if (err.kind == "not_found") {
+        res.status(404).send({
+          message: `Not found.`
+        });
+      } else {
+        res.status(900).send({
+          message: "Error retrieving operations"
+        });
+      }
+    } else res.send(data);
+  });
+};
+
+exports.retrieve3rdOperations = (req, res) => {
+  user.get3rdOperations(req.params.userID, (err, data) => {
+    if (err) {
+      if (err.kind == "not_found") {
+        res.status(404).send({
+          message: `Not found.`
+        });
+      } else {
+        res.status(900).send({
+          message: "Error retrieving operations"
+        });
+      }
+    } else res.send(data);
+  });
+};
+
+exports.retrieve4thOperations = (req, res) => {
+  user.get4thOperations(req.params.userID, (err, data) => {
     if (err) {
       if (err.kind == "not_found") {
         res.status(404).send({

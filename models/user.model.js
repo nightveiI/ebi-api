@@ -142,61 +142,61 @@ User.getDoneOperations = (userID, result) => {
 }
 
 
-// User.get3rdOperations = (userID, result) => {
-//     const today = new Date();
-//     const yesterday = new Date(today);
+User.get3rdOperations = (userID, result) => {
+    var today = new Date();
+    var yesterday = new Date(today);
 
-//     yesterday.setDate(yesterday.getDate() - 1);
-//     var dd = String(yesterday.getDate()).padStart(2, '0');
-//     var mm = String(yesterday.getMonth() + 1).padStart(2, '0'); //January is 0!
-//     var yyyy = yesterday.getFullYear();
-//     yesterday =  yyyy + '/' + mm + '/' + dd;
-//     sql.query(`SELECT TR.IdFOlioTramite, TR.IdConceptoProceso, TR.FechaTramite, TR.IdAduana, AD.NombreAduana, TR.IdClienteFactura, CL.NombreCLiente, TR.IdLineaTRansporte, LT.NombreLineaTRansporte,
-//     TR.IdTramite, TR.FechaLLegada, TR.POCliente, TR.EcoSellos, TR.FechaConceptoProceso, TR.Listo, TR.HoraListo, VO.Secuencia, VO.FechaENtrada, VO.HoraENtrada, VO.IdLocalizacion, VO.TelRadio, 
-//     YEAR(FechaLlegada) FROM tbltramites TR  LEFT JOIN tbladuanas AD ON TR.IdAduana = AD.IdAduana 
-//     LEFT JOIN tblclientes CL ON TR.IdCLienteFactura = CL.IdCliente LEFT JOIN tbllineastransporte  LT ON TR.IdLIneaTRansporte = LT.IdLineaTRansporte 
-//     LEFT JOIN tblvehiculos_operaciones VO ON TR.EcoSellos = VO.NumEconomico AND TR.IdLineaTRansporte = VO.IdLineaTransporte AND TR.FechaTramite = VO.FechaEntrada 
-//     WHERE TR.FolioCancelado =0 AND TR.IdInspeccion =1 AND FechaLlegada>=  '2021/05/13' AND FechaLlegada <=
-//      '2021/05/13'  AND FechaTramite IS NULL AND TR.IdClienteFactura ='${userID}'`, (err, res) => {
-//         if (err) {
-//             console.log("error: ", err);
-//             result(null, err);
-//             return;
-//         }
+    yesterday.setDate(yesterday.getDate() - 1);
+    var dd = String(yesterday.getDate()).padStart(2, '0');
+    var mm = String(yesterday.getMonth() + 1).padStart(2, '0'); 
+    var yyyy = yesterday.getFullYear();
+    yesterday =  yyyy + '/' + mm + '/' + dd;
+    sql.query(`SELECT TR.IdFOlioTramite, TR.IdConceptoProceso, TR.FechaTramite, TR.IdAduana, AD.NombreAduana, TR.IdClienteFactura, CL.NombreCLiente, TR.IdLineaTRansporte, LT.NombreLineaTRansporte,
+    TR.IdTramite, TR.FechaLLegada, TR.POCliente, TR.EcoSellos, TR.FechaConceptoProceso, TR.Listo, TR.HoraListo, VO.Secuencia, VO.FechaENtrada, VO.HoraENtrada, VO.IdLocalizacion, VO.TelRadio, 
+    YEAR(FechaLlegada) FROM tbltramites TR  LEFT JOIN tbladuanas AD ON TR.IdAduana = AD.IdAduana 
+    LEFT JOIN tblclientes CL ON TR.IdCLienteFactura = CL.IdCliente LEFT JOIN tbllineastransporte  LT ON TR.IdLIneaTRansporte = LT.IdLineaTRansporte 
+    LEFT JOIN tblvehiculos_operaciones VO ON TR.EcoSellos = VO.NumEconomico AND TR.IdLineaTRansporte = VO.IdLineaTransporte AND TR.FechaTramite = VO.FechaEntrada 
+    WHERE TR.FolioCancelado =0 AND TR.IdInspeccion =1 AND FechaLlegada>=  '${yesterday.toString()}' AND FechaLlegada <=
+    '${today.toString()}'  AND FechaTramite IS NULL AND TR.IdClienteFactura ='${userID}'`, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
 
-//         console.log("Operations Table : ", res);
-//         result(null, res);
-//     });
-// }
+        console.log("Operations Table : ", res);
+        result(null, res);
+    });
+}
 
-// User.get4thOperations = (userID, result) => {
-//     const today = new Date();
-//     const yesterday = new Date(today);
+User.get4thOperations = (userID, result) => {
+    var today = new Date();
+    var yesterday = new Date(today);
 
-//     yesterday.setDate(yesterday.getDate() - 1);
-//     var dd = String(yesterday.getDate()).padStart(2, '0');
-//     var mm = String(yesterday.getMonth() + 1).padStart(2, '0'); //January is 0!
-//     var yyyy = yesterday.getFullYear();
-//     yesterday =  yyyy + '/' + mm + '/' + dd;
-//     sql.query(`SELECT TR.IdFOlioTramite, TR.IdConceptoProceso, TR.FechaTramite, TR.IdAduana, AD.NombreAduana, TR.IdClienteFactura, CL.NombreCLiente, TR.IdLineaTRansporte, 
-//     LT.NombreLineaTRansporte,  TR.IdTramite, TR.FechaLLegada, TR.POCliente, TR.EcoSellos, TR.FechaConceptoProceso, TR.Listo, TR.HoraListo, VO.Secuencia, VO.FechaENtrada, 
-//     VO.HoraENtrada, VO.IdLocalizacion, VO.TelRadio, TT.IdConceptoTiempo, TT.FechaRegistro, TT.HoraRegistro, TR.InspeccionUSDA FROM tbltramites TR 
-//     LEFT JOIN tbladuanas AD ON TR.IdAduana = AD.IdAduana LEFT JOIN tblclientes CL ON TR.IdCLienteFactura = CL.IdCliente 
-//     LEFT JOIN tbllineastransporte  LT ON TR.IdLIneaTRansporte = LT.IdLineaTRansporte LEFT JOIN tblvehiculos_operaciones VO ON TR.EcoSellos = VO.NumEconomico 
-//     AND TR.IdLineaTRansporte = VO.IdLineaTransporte AND TR.FechaTramite = VO.FechaEntrada 
-//     LEFT JOIN tbltramitestiempos TT ON TR.IdInspeccion =1 = TT.IdInspeccion AND TR.IdFolioTramite = TT.IdFolioTramite 
-//     WHERE TR.FolioCancelado = 0 AND TR.IdInspeccion =1 AND (TR.IdConceptoProceso = 1 OR TR.IdConceptoProceso = 2 OR TR.IdConceptoProceso = 7) 
-//     AND TR.FechaTramite<'2021/05/13' AND TT.IdCOnceptoTiempo =14 AND TT.FechaRegistro IS NULL AND TR.IdClienteFactura ='${userID}'`, (err, res) => {
-//         if (err) {
-//             console.log("error: ", err);
-//             result(null, err);
-//             return;
-//         }
+    yesterday.setDate(yesterday.getDate() - 1);
+    var dd = String(yesterday.getDate()).padStart(2, '0');
+    var mm = String(yesterday.getMonth() + 1).padStart(2, '0'); 
+    var yyyy = yesterday.getFullYear();
+    yesterday =  yyyy + '/' + mm + '/' + dd;
+    sql.query(`SELECT TR.IdFOlioTramite, TR.IdConceptoProceso, TR.FechaTramite, TR.IdAduana, AD.NombreAduana, TR.IdClienteFactura, CL.NombreCLiente, TR.IdLineaTRansporte, 
+    LT.NombreLineaTRansporte,  TR.IdTramite, TR.FechaLLegada, TR.POCliente, TR.EcoSellos, TR.FechaConceptoProceso, TR.Listo, TR.HoraListo, VO.Secuencia, VO.FechaENtrada, 
+    VO.HoraENtrada, VO.IdLocalizacion, VO.TelRadio, TT.IdConceptoTiempo, TT.FechaRegistro, TT.HoraRegistro, TR.InspeccionUSDA FROM tbltramites TR 
+    LEFT JOIN tbladuanas AD ON TR.IdAduana = AD.IdAduana LEFT JOIN tblclientes CL ON TR.IdCLienteFactura = CL.IdCliente 
+    LEFT JOIN tbllineastransporte  LT ON TR.IdLIneaTRansporte = LT.IdLineaTRansporte LEFT JOIN tblvehiculos_operaciones VO ON TR.EcoSellos = VO.NumEconomico 
+    AND TR.IdLineaTRansporte = VO.IdLineaTransporte AND TR.FechaTramite = VO.FechaEntrada 
+    LEFT JOIN tbltramitestiempos TT ON TR.IdInspeccion =1 = TT.IdInspeccion AND TR.IdFolioTramite = TT.IdFolioTramite 
+    WHERE TR.FolioCancelado = 0 AND TR.IdInspeccion =1 AND (TR.IdConceptoProceso = 1 OR TR.IdConceptoProceso = 2 OR TR.IdConceptoProceso = 7) 
+    AND TR.FechaTramite<'${today.toString()}' AND TT.IdCOnceptoTiempo =14 AND TT.FechaRegistro IS NULL AND TR.IdClienteFactura ='${userID}'`, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
 
-//         console.log("Operations Table : ", res);
-//         result(null, res);
-//     });
-// }
+        console.log("Operations Table : ", res);
+        result(null, res);
+    });
+}
 
 
 
